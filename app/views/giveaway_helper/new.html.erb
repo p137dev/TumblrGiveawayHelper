@@ -1,0 +1,7 @@
+<h1>GiveawayHelper#new</h1>
+<p>Find me in app/views/giveaway_helper/new.html.erb</p>
+
+<%= form_for @link, :url => { :action => "pick" } do |f| %>
+    <%= f.text_field  :giveawaylink %>
+    <%= f.submit "Pick the winner!", class: "btn btn-primary" %>
+<%end%>
