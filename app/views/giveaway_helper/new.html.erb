@@ -1,7 +1,13 @@
-<h1>GiveawayHelper#new</h1>
-<p>Find me in app/views/giveaway_helper/new.html.erb</p>
+<div align="center">
+  <h1>Tumblr Giveaway Helper 1.0</h1>
+  <h7>just enter the link below!</h7>
+  <hr>
+</div>
 
-<%= form_for @link, :url => { :action => "pick" } do |f| %>
-    <%= f.text_field  :giveawaylink %>
-    <%= f.submit "Pick the winner!", class: "btn btn-primary" %>
-<%end%>
+<div align="center">
+  <%= form_for @link, :url => { :action => "pick" } do |f| %>
+      <%= f.text_field  :giveawaylink %>
+      <%= f.submit "Pick the winner!", class: "btn btn-primary" %>
+  <%end%>
+</div>
+
