@@ -4,5 +4,8 @@
 </div>
 
 <div align="center">
-  <%= "The link was #{@link['giveawaylink']} and the winner is #{@winner}"  %>
+  <h3><%= "The winner is:" %></h3>
+
+  <img src="<%= @winners_avatar %>" alt="giveaway winner's avatar"</img>
+  <h2><a href="http://<%= @winners_blog_link %>"><%= @winner.split("").join(" ") %></a></h2>
 </div>

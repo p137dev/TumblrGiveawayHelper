@@ -4,6 +4,9 @@ class GiveawayHelperController < ApplicationController
   end
 
   def pick
+
+    #TODO: Do I need a database for this? Also sanitize input, make a header and a footer, add a log to view, allow Tumblr reblogging
+
     @link = TumblrLink.create('giveawaylink' => params['tumblr_link']['giveawaylink'])
 
     require 'nokogiri'
@@ -62,8 +65,13 @@ class GiveawayHelperController < ApplicationController
     print ballot_box.sort, "\n"
 
     puts "And the winner is... "
-    @winner = ballot_box.sample.to_s.concat("!")
+    @winner = ballot_box.sample.to_s
     puts @winner
+
+    # Get winner's avatar?
+    @winners_blog_link = @winner.to_s + ".tumblr.com"
+    @winners_avatar = Nokogiri.HTML(open("http://#{@winners_blog_link}")).xpath('//link[@rel="shortcut icon"]/@href').text
+
 
   end
 
