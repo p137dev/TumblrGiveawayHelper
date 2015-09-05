@@ -1,18 +1,29 @@
 class GiveawayHelperController < ApplicationController
   def new
-    @link = TumblrLink.new(params[:giveawaylink])
+    @userinput = TumblrLink.new(params[:giveawaylink])
   end
 
   def pick
 
-    #TODO: Do I need a database for this? Also sanitize input, make a header and a footer, add a log to view, allow Tumblr reblogging
-
-    @link = TumblrLink.create('giveawaylink' => params['tumblr_link']['giveawaylink'])
+    #TODO: Do I need a database for this? Make a header and a footer, add a log to view, allow Tumblr reblogging. Add errors page, add fanfares. Add more scripts.
 
     require 'nokogiri'
     require 'open-uri'
 
-    notes = Nokogiri.HTML(open(@link['giveawaylink'])).css("ol.notes")
+    @userinput = TumblrLink.new('giveawaylink' => params['tumblr_link']['giveawaylink'])
+
+    if @userinput.valid?
+      tumblr_script_ballot(@userinput)
+    else
+      redirect_to action: :new
+    end
+
+  end
+
+  private
+
+  def tumblr_script_ballot(link)
+    notes = Nokogiri.HTML(open(link['giveawaylink'])).css("ol.notes")
 
     notes_reblogs = notes.css("li.reblog")
     notes_likes = notes.css("li.like")
@@ -71,8 +82,8 @@ class GiveawayHelperController < ApplicationController
     # Get winner's avatar?
     @winners_blog_link = @winner.to_s + ".tumblr.com"
     @winners_avatar = Nokogiri.HTML(open("http://#{@winners_blog_link}")).xpath('//link[@rel="shortcut icon"]/@href').text
-
-
   end
 
+
 end
+
