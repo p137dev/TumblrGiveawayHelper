@@ -1,9 +1,25 @@
+<div class="container-fluid bg-info">
 
+  <h4>Welcome!</h4>
+  <h5>
+    The current ruleset is:
+    <li>A person, who reblogged your picture gets one "ticket" in the box.</li>
+    <li>A person, who reblogged AND liked your picture gets two "tickets".</li>
+    <li>A person, who only liked your picture gets no "tickets". :-(</li>
+  </h5>
+  <h6>
+    (More rulesets coming soon!)
+  </h6>
 
-<div align="center">
+</div>
+
+<br>
+
+<div class="container-fluid">
   <%= form_for @userinput, :url => { :action => "pick" } do |f| %>
-      <%= f.text_field  :giveawaylink %>
-      <%= f.submit "Pick the winner!", class: "btn btn-primary" %>
+      <%= f.text_field  :giveawaylink, type: "text", class: "form-control", placeholder: "Paste the link to a Tumblr giveaway post here..." %>
+      <br>
+      <%= f.submit "Pick the winner!", class: "btn btn-primary btn-lg btn-block"%>
   <%end%>
 </div>
 

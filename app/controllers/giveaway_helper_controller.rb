@@ -5,7 +5,7 @@ class GiveawayHelperController < ApplicationController
 
   def pick
 
-    #TODO: Do I need a database for this? Make a header and a footer, add a log to view, allow Tumblr reblogging. Add errors page, add fanfares. Add more scripts.
+    #TODO: Do I need a database for this? Enhance the header and the footer, allow Tumblr reblogging. Add errors page, add fanfares. Add more rulesets. Allow the user to go to frontpage.
 
     require 'nokogiri'
     require 'open-uri'
@@ -30,27 +30,33 @@ class GiveawayHelperController < ApplicationController
     ballot_box_reblogs = Array.new
     ballot_box_likes = Array.new
     ballot_box = Array.new
+    @log = Array.new
 
-    puts "Adding the people who reblogged the post to the rebloggers box."
+    @log << "Adding the people who reblogged the post to the rebloggers box."
+    @log << "-" * 50
 
     notes_reblogs.each do |note|
-      puts "ADDING REBLOG: #{note.text.split.first}"
+      @log << "ADDING REBLOG: #{note.text.split.first}"
       ballot_box_reblogs << note.text.split.first
     end
 
-    puts "Adding the people who liked the post to the likes box."
+    @log << "-" * 50
+    @log << "Adding the people who liked the post to the likes box."
+    @log << "-" * 50
 
     notes_likes.each do |note|
       puts "ADDING LIKE: #{note.text.split.first}"
       ballot_box_likes << note.text.split.first
     end
 
-    puts "Sorting the reblog box and the likes box alphabetically."
+    @log << "Sorting the reblog box and the likes box alphabetically."
+    @log << "-" * 50
 
     ballot_box_reblogs.sort!
     ballot_box_likes.sort!
 
-    puts "Comparing both the reblogs box and the likes box to find people who both liked and reblogged the post."
+    @log << "Comparing both the reblogs box and the likes box to find people who both liked and reblogged the post."
+    @log << "-" * 50
 
     i = 0
     ballot_box_reblogs.each do |candidate|
@@ -59,7 +65,7 @@ class GiveawayHelperController < ApplicationController
         #p "Comparing with:", ballot_box_likes[i], i
 
         if candidate == ballot_box_likes[i]
-          puts "* #{candidate} both liked and reblogged the post, adding him/her to the ballot box."
+          @log << "#{candidate} both liked and reblogged the post, adding him/her to the ballot box."
           ballot_box << candidate
         end
 
@@ -68,16 +74,21 @@ class GiveawayHelperController < ApplicationController
       end
     end
 
-    puts "Adding people who reblogged the post to the ballot box."
+    @log << "Adding people who reblogged the post to the ballot box."
+    @log << "-" * 50
 
     ballot_box += ballot_box_reblogs
 
-    puts "The tickets in the ballot box are:"
-    print ballot_box.sort, "\n"
+    @log << "The tickets in the ballot box are:"
+    @log << "-" * 50
+    @log << ballot_box.sort
+    @log << "-" * 50
 
-    puts "And the winner is... "
+    @log << "And the winner is..."
+    @log << "-" * 50
     @winner = ballot_box.sample.to_s
-    puts @winner
+    @log << @winner
+    @log << "-" * 50
 
     # Get winner's avatar?
     @winners_blog_link = @winner.to_s + ".tumblr.com"

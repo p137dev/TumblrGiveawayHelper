@@ -1,6 +1,31 @@
-<div align="center">
-  <h3><%= "The winner is:" %></h3>
+<div class="container" align="center">
 
-  <img src="<%= @winners_avatar %>" alt="giveaway winner's avatar"</img>
-  <h2><a href="http://<%= @winners_blog_link %>"><%= @winner.split("").join(" ") %></a></h2>
+  <p>
+    <h3><%= "The winner is:" %></h3>
+    <img src="<%= @winners_avatar %>" class="img-responsive img-circle" alt="giveaway winner's avatar">
+    <h2><a href="http://<%= @winners_blog_link %>"><%= @winner.split("").join(" ") %></a></h2>
+  </p>
+
+  <button id="btn_show_log" type="button" class="btn btn-info">Show/hide log</button>
+
 </div>
+
+<br>
+<div id="log" class="container">
+    <pre>
+      <h6><%= @log.join('<br/>').html_safe %></h6>
+    </pre>
+</div>
+
+<script>
+
+    $(document).ready(function() {
+
+        $('#log').hide();
+
+        $('#btn_show_log').click(function() {
+            $('#log').toggle("fast");
+        });
+    });
+
+</script>
