@@ -74,6 +74,7 @@ class GiveawayHelperController < ApplicationController
       end
     end
 
+    @log << "-" * 50
     @log << "Adding people who reblogged the post to the ballot box."
     @log << "-" * 50
 
