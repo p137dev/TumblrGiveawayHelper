@@ -1,28 +1,9 @@
-== README
+# TumblrGiveawayHelper
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project was meant to be a tool to assist artists in organizing "giveaways" on Tumblr.
 
-Things you may want to cover:
+Unfortunately, it was based on notes and Tumblr returns only 50 of these (same goes for Tumblr API). Moreover, Tumblr's TOS makes it clear that they don't want Tumblr to be scraped.
 
-* Ruby version
+TumblrGiveawayHelper is based on Ruby on Rails 4, jQuery & Bootstrap for styling, Nokogiri for scraping  and SQLite3 for DB purposes.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+The project won't be developed anymore, but I really enjoyed making it, so here it is. Maybe someone will find it helpful one day.
